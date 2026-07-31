@@ -1,0 +1,56 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 36, 32, .45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6vh 20px;
+  overflow-y: auto;
+  z-index: 100;
+  animation: fadein .18s ease;
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radio-l);
+  width: 100%;
+  max-width: 560px;
+  box-shadow: var(--sombra);
+  animation: rise .2s cubic-bezier(.2, .9, .25, 1);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.head h3 { font-size: 16px; }
+
+.cerrar {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface-inset);
+  color: var(--ink-soft);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.cerrar:hover { color: var(--ink); border-color: var(--border-strong); }
+
+.body { padding: 22px; }
+
+@keyframes fadein { from { opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay, .modal { animation: none; }
+}

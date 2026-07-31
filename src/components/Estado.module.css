@@ -1,0 +1,37 @@
+.estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 20px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  text-align: center;
+}
+
+.error { color: var(--cancelada); }
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  border-top-color: var(--acento);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.reintentar {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: var(--radio-s);
+  font-weight: 600;
+  font-size: 12.5px;
+  cursor: pointer;
+}

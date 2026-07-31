@@ -1,0 +1,141 @@
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/work-sans/400.css";
+@import "@fontsource/work-sans/500.css";
+@import "@fontsource/work-sans/600.css";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+
+:root {
+  /* superficies */
+  --bg: #EEF1EC;
+  --surface: #FFFFFF;
+  --surface-inset: #F7F8F5;
+  --border: rgba(27, 36, 32, .12);
+  --border-strong: rgba(27, 36, 32, .22);
+
+  /* tinta */
+  --ink: #1B2420;
+  --ink-soft: #5C6960;
+  --ink-mute: #8B958E;
+
+  /* acento */
+  --acento: #92650E;
+  --acento-bg: #F5ECD9;
+  --verde: #1F6B45;
+  --rosada: #A8402C;
+
+  /* estado de implementación */
+  --implementada: #1F6B45;
+  --implementada-bg: #E4F1E9;
+  --en-proceso: #92650E;
+  --en-proceso-bg: #F5ECD9;
+  --no-iniciada: #5C6960;
+  --no-iniciada-bg: #E9ECE8;
+  --cancelada: #A8402C;
+  --cancelada-bg: #F6E4E0;
+  --vencida: #C23B2E;
+
+  --radio-s: 7px;
+  --radio-m: 12px;
+  --radio-l: 18px;
+
+  --sombra: 0 1px 2px rgba(27, 36, 32, .05), 0 6px 20px -12px rgba(27, 36, 32, .18);
+}
+
+:root[data-theme="dark"] {
+  --bg: #182722;
+  --surface: #20342C;
+  --surface-inset: #182722;
+  --border: rgba(242, 239, 228, .13);
+  --border-strong: rgba(242, 239, 228, .24);
+
+  --ink: #F2EFE4;
+  --ink-soft: #AEBBB0;
+  --ink-mute: #7C8A80;
+
+  --acento: #E0B23C;
+  --acento-bg: #332A12;
+  --verde: #7FC49A;
+  --rosada: #E08E76;
+
+  --implementada: #7FC49A;
+  --implementada-bg: #1E332A;
+  --en-proceso: #E0B23C;
+  --en-proceso-bg: #332A12;
+  --no-iniciada: #AEBBB0;
+  --no-iniciada-bg: #232E29;
+  --cancelada: #E08E76;
+  --cancelada-bg: #33201A;
+  --vencida: #E9604D;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #182722;
+    --surface: #20342C;
+    --surface-inset: #182722;
+    --border: rgba(242, 239, 228, .13);
+    --border-strong: rgba(242, 239, 228, .24);
+
+    --ink: #F2EFE4;
+    --ink-soft: #AEBBB0;
+    --ink-mute: #7C8A80;
+
+    --acento: #E0B23C;
+    --acento-bg: #332A12;
+    --verde: #7FC49A;
+    --rosada: #E08E76;
+
+    --implementada: #7FC49A;
+    --implementada-bg: #1E332A;
+    --en-proceso: #E0B23C;
+    --en-proceso-bg: #332A12;
+    --no-iniciada: #AEBBB0;
+    --no-iniciada-bg: #232E29;
+    --cancelada: #E08E76;
+    --cancelada-bg: #33201A;
+    --vencida: #E9604D;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.font-mono {
+  font-family: "Space Mono", Consolas, "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+a { color: inherit; }
+button, input, select, textarea { font-family: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}

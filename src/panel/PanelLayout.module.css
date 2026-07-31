@@ -1,0 +1,64 @@
+.shell { min-height: 100%; }
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px dashed var(--border);
+  padding: 16px 28px;
+}
+
+.inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; margin-right: auto; }
+
+.mark {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--acento);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--acento);
+  font-weight: 800;
+  font-size: 12px;
+  flex: none;
+}
+
+.name { font-weight: 700; font-size: 14px; letter-spacing: .01em; }
+.sub { font-size: 11px; color: var(--ink-soft); }
+
+.rail { display: flex; gap: 26px; }
+.rail a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  padding: 6px 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+}
+.rail a.activo, .rail a:hover { color: var(--ink); }
+.rail a.activo { border-bottom-color: var(--acento); }
+
+.main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 28px 90px;
+}
+
+@media (max-width: 720px) {
+  .top { padding: 14px 18px; }
+  .main { padding: 22px 16px 80px; }
+  .rail { gap: 16px; }
+}

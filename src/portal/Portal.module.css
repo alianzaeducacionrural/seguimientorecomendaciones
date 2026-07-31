@@ -1,0 +1,69 @@
+.shell { min-height: 100%; }
+
+.top {
+  position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px dashed var(--border);
+  padding: 16px 24px; display: flex; align-items: center; gap: 12px;
+}
+.mark {
+  width: 34px; height: 34px; border: 1.5px solid var(--acento); border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; color: var(--acento); font-weight: 800; font-size: 12px; flex: none;
+}
+.name { font-weight: 700; font-size: 13.5px; }
+.sub { font-size: 10.5px; color: var(--ink-soft); }
+
+.main { max-width: 720px; margin: 0 auto; padding: 26px 20px 90px; }
+
+.hero {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-l);
+  padding: 28px; margin-bottom: 22px; position: relative;
+}
+.eyebrow { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--acento); font-weight: 700; font-family: "Space Mono", monospace; }
+.hero h1 { font-size: 22px; margin: 8px 0 4px; text-transform: none; letter-spacing: normal; }
+.hero p { color: var(--ink-soft); margin: 0; font-size: 13px; }
+.stats { display: flex; gap: 28px; margin-top: 20px; flex-wrap: wrap; }
+.stats b { display: block; font-size: 21px; }
+.stats span { font-size: 10.5px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .05em; }
+
+.sinAsignaciones { color: var(--ink-soft); font-size: 13.5px; text-align: center; padding: 30px 0; }
+
+.tarjeta { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-m); padding: 22px; margin-bottom: 16px; }
+.tarjetaTop { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+.codigo { font-size: 11px; color: var(--ink-mute); margin-bottom: 6px; }
+.tarjetaTop h4 { font-size: 14.5px; line-height: 1.4; font-weight: 600; }
+.evidenciaEsperada { font-size: 12px; color: var(--ink-soft); margin: 6px 0 0; }
+
+.dialRow { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.dialTexto { font-size: 11.5px; color: var(--ink-soft); }
+
+.listaEvidencias { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.listaEvidencias a { font-size: 12.5px; color: var(--acento); }
+
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.full { grid-column: 1 / -1; }
+.form label { display: flex; flex-direction: column; gap: 6px; }
+.form span { font-size: 10.5px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .05em; }
+.form select, .form input, .form textarea {
+  width: 100%; border: 1px solid var(--border); background: var(--surface-inset); border-radius: 8px;
+  padding: 9px 11px; font-size: 13px; color: var(--ink); font-family: inherit;
+}
+
+.evidRow { display: flex; gap: 8px; }
+.evidRow input { flex: 1; }
+.btnGhost {
+  appearance: none; border: 1px dashed var(--border-strong); background: transparent; color: var(--ink-soft);
+  padding: 9px 14px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; white-space: nowrap;
+}
+.btnGhost:hover { color: var(--ink); border-color: var(--acento); }
+
+.mensaje { font-size: 12px; color: var(--acento); margin: 12px 0 0; }
+
+.btnPrimary {
+  appearance: none; border: 1px solid var(--acento); background: var(--acento); color: var(--surface);
+  padding: 11px 22px; border-radius: 9px; font-weight: 800; font-size: 12.5px; letter-spacing: .03em;
+  text-transform: uppercase; cursor: pointer; margin-top: 16px;
+}
+.btnPrimary:disabled { opacity: .6; cursor: default; }
+
+@media (max-width: 560px) {
+  .form { grid-template-columns: 1fr; }
+}

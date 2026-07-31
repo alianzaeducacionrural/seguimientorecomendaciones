@@ -1,0 +1,20 @@
+Seguimiento a Recomendaciones — Comité Académico
+=================================================
+
+Sitio (GitHub Pages, pendiente de publicar):
+  https://alianzaeducacionrural.github.io/seguimientorecomendaciones/
+
+Web App (Apps Script):
+  https://script.google.com/macros/s/AKfycbxbV9AfaBokUNpJ0keYN92luqA4iDazI6CcDQMfucKwp6vMUcRVwoEIvHSgzF3I2_hR/exec
+
+Editor de Apps Script:
+  https://script.google.com/d/1wfnbYjKXhnzQl-toQbNSFYm8SEjvmqFimZD2CMUkUz3F2t1Rd_obCM7M/edit
+
+Spreadsheet (backend):
+  https://docs.google.com/spreadsheets/d/1Ho7rxIi1-pMsL090r6xduJ4rnO8uDk5Xmpv6z2w6f4E/edit
+
+Carpeta de Drive del backend:
+  https://drive.google.com/drive/folders/1Jyoqe-gmOlT2rOVm1cdTHnq2Vq7LEjA5
+
+Catálogo externo (solo lectura — Municipios/Instituciones/Sedes/Universidades):
+  https://docs.google.com/spreadsheets/d/1sDwOuJk0x1mO6lxJbzzWTd088SOg7fAWEuXSZEM1Eog/edit

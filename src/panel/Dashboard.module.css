@@ -1,0 +1,60 @@
+.titulo { font-size: 26px; margin: 4px 0 6px; }
+.desc { color: var(--ink-soft); margin: 0 0 28px; font-size: 14px; max-width: 640px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radio-m);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.gaugeCard {
+  background: var(--surface);
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); font-weight: 700; margin-top: 4px; }
+.sub { font-size: 11px; color: var(--ink-mute); margin-top: 3px; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radio-m);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+.panel h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+.panelDesc { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 16px; }
+
+.recRow { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px dashed var(--border); }
+.recRow:last-of-type { border-bottom: none; }
+.code { font-size: 11px; color: var(--ink-mute); flex: none; width: 96px; padding-top: 2px; }
+.body { flex: 1; min-width: 0; }
+.recTitulo { font-size: 14px; font-weight: 600; margin: 0 0 8px; line-height: 1.4; }
+.dest { font-size: 11.5px; color: var(--ink-soft); }
+.tipoChip {
+  display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--surface); background: var(--ink-soft); padding: 2px 7px; border-radius: 4px; margin-right: 8px;
+}
+.right { flex: none; }
+
+.verTodas { display: inline-block; margin-top: 12px; font-size: 12.5px; font-weight: 600; color: var(--acento); text-decoration: none; }
+.verTodas:hover { text-decoration: underline; }
+
+.barras { display: flex; flex-direction: column; gap: 14px; }
+.barraFila {}
+.barraHead { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px; }
+.track { height: 6px; background: var(--surface-inset); border-radius: 999px; overflow: hidden; }
+.fill { height: 100%; background: var(--acento); border-radius: 999px; transition: width .4s ease; }
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}

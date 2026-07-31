@@ -1,0 +1,52 @@
+.head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 26px; flex-wrap: wrap; }
+.titulo { font-size: 26px; margin: 4px 0 6px; }
+.desc { color: var(--ink-soft); margin: 0; font-size: 14px; max-width: 560px; }
+
+.btnPrimary {
+  appearance: none; border: 1px solid var(--acento); background: var(--acento); color: var(--surface);
+  padding: 11px 20px; border-radius: 9px; font-weight: 800; font-size: 12.5px; letter-spacing: .03em;
+  text-transform: uppercase; cursor: pointer; flex: none;
+}
+.btnPrimary:disabled { opacity: .6; cursor: default; }
+
+.lista { display: flex; flex-direction: column; gap: 14px; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radio-m); padding: 20px 22px; }
+.cardTop { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.codigo { font-size: 11.5px; color: var(--ink-mute); margin-right: 10px; }
+.tipoChip {
+  display: inline-block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em;
+  background: var(--acento-bg); color: var(--acento); padding: 3px 9px; border-radius: 6px; margin-right: 8px; font-weight: 700;
+}
+.prioridad { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; color: var(--ink-soft); }
+.prioridad[data-prioridad="Alta"] { color: var(--cancelada); }
+
+.acciones { display: flex; gap: 8px; }
+.acciones button {
+  appearance: none; border: 1px solid var(--border); background: var(--surface-inset); color: var(--ink-soft);
+  padding: 7px 12px; border-radius: 7px; font-size: 11.5px; font-weight: 600; cursor: pointer;
+}
+.acciones button:hover { color: var(--ink); border-color: var(--border-strong); }
+.btnDanger:hover { color: var(--cancelada) !important; border-color: var(--cancelada) !important; }
+
+.texto { font-size: 14px; font-weight: 600; margin: 0 0 8px; line-height: 1.45; }
+.hallazgo { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 8px; }
+.fechas { display: flex; gap: 16px; font-size: 11.5px; color: var(--ink-mute); margin-bottom: 12px; }
+
+.destinatarios { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 10px; border-top: 1px dashed var(--border); }
+.sinAsignar { font-size: 12px; color: var(--ink-mute); font-style: italic; }
+.destChip { display: flex; align-items: center; gap: 8px; font-size: 12.5px; background: var(--surface-inset); border: 1px solid var(--border); padding: 5px 6px 5px 10px; border-radius: 8px; }
+
+.form { display: flex; flex-direction: column; gap: 14px; }
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.campo { display: flex; flex-direction: column; gap: 6px; font-size: 11.5px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+.campo input, .campo select, .campo textarea {
+  border: 1px solid var(--border); background: var(--surface-inset); border-radius: 8px; padding: 9px 11px;
+  font-size: 13.5px; color: var(--ink); font-family: inherit; font-weight: 400; text-transform: none; letter-spacing: normal;
+}
+
+.modalDesc { font-size: 13px; color: var(--ink-soft); margin: 0 0 18px; }
+
+@media (max-width: 640px) {
+  .formGrid { grid-template-columns: 1fr; }
+}

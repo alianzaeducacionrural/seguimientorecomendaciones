@@ -1,0 +1,14 @@
+.btn {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--ink);
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--acento); color: var(--acento); }
+
+.sinToken { color: var(--ink-mute); font-size: 12px; font-style: italic; }
