@@ -1,0 +1,35 @@
+.form { display: flex; flex-direction: column; gap: 14px; }
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.campo { display: flex; flex-direction: column; gap: 6px; font-size: 11.5px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+.campo input, .campo select, .campo textarea {
+  border: 1px solid var(--border); background: var(--surface-inset); border-radius: 8px; padding: 9px 11px;
+  font-size: 13.5px; color: var(--ink); font-family: inherit; font-weight: 400; text-transform: none; letter-spacing: normal;
+}
+
+.orden {
+  border: 1px solid var(--border);
+  background: var(--surface-inset);
+  border-radius: var(--radio-m);
+  padding: 16px;
+  margin-top: 4px;
+}
+.ordenHead { margin-bottom: 12px; }
+.ordenTitulo { display: block; font-size: 11.5px; font-weight: 700; color: var(--acento); text-transform: uppercase; letter-spacing: .05em; }
+.ordenDesc { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+
+.btnPrimary {
+  appearance: none; border: 1px solid var(--acento); background: var(--acento); color: var(--surface);
+  padding: 12px 20px; border-radius: 9px; font-weight: 800; font-size: 12.5px; letter-spacing: .03em;
+  text-transform: uppercase; cursor: pointer;
+}
+.btnPrimary:hover { filter: brightness(1.05); }
+.btnPrimary:disabled { opacity: .6; cursor: default; }
+
+.exito {
+  margin: 0; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  background: var(--implementada-bg); color: var(--implementada); text-align: center;
+}
+
+@media (max-width: 640px) {
+  .formGrid { grid-template-columns: 1fr; }
+}

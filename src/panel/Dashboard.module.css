@@ -3,26 +3,43 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radio-m);
-  overflow: hidden;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 14px;
   margin-bottom: 24px;
+  align-items: stretch;
 }
 
-.gaugeCard {
+/* dial circular — pieza distintiva del proyecto, usada una sola vez como ancla visual */
+.hero {
   background: var(--surface);
-  padding: 22px 18px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--acento);
+  border-radius: var(--radio-m);
+  padding: 24px 26px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.heroTexto { display: flex; flex-direction: column; gap: 4px; }
+.heroValor { font-size: 34px; font-weight: 700; margin: 2px 0 0; line-height: 1; }
+.heroSub { font-size: 12px; color: var(--ink-mute); margin: 2px 0 0; }
+
+.stats { display: flex; flex-direction: column; gap: 14px; }
+.stat {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--ink-mute);
+  border-radius: var(--radio-m);
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
+  gap: 4px;
 }
-
-.label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); font-weight: 700; margin-top: 4px; }
-.sub { font-size: 11px; color: var(--ink-mute); margin-top: 3px; }
+.statAlerta { border-top-color: var(--no-iniciada); }
+.statValor { font-size: 26px; font-weight: 700; margin: 2px 0 0; line-height: 1; }
+.statSub { font-size: 11px; color: var(--ink-mute); margin: 0; }
 
 .panel {
   background: var(--surface);
@@ -34,16 +51,27 @@
 .panel h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
 .panelDesc { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 16px; }
 
-.recRow { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px dashed var(--border); }
+.recRow {
+  display: flex; gap: 16px; align-items: flex-start; padding: 16px 10px; margin: 0 -10px;
+  border-bottom: 1px dashed var(--border); text-decoration: none; color: inherit; border-radius: 8px;
+  transition: background .15s ease;
+}
 .recRow:last-of-type { border-bottom: none; }
-.code { font-size: 11px; color: var(--ink-mute); flex: none; width: 96px; padding-top: 2px; }
+.recRow:hover { background: var(--surface-inset); }
+.recRow:hover .recTitulo { color: var(--acento); }
 .body { flex: 1; min-width: 0; }
-.recTitulo { font-size: 14px; font-weight: 600; margin: 0 0 8px; line-height: 1.4; }
+.recTitulo { font-size: 14px; font-weight: 600; margin: 0 0 8px; line-height: 1.4; transition: color .15s ease; }
 .dest { font-size: 11.5px; color: var(--ink-soft); }
 .tipoChip {
   display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--surface); background: var(--ink-soft); padding: 2px 7px; border-radius: 4px; margin-right: 8px;
+  color: var(--acento); background: var(--acento-bg); padding: 3px 8px; border-radius: 5px; margin-right: 8px; font-weight: 700;
 }
+.tipoChip[data-tipo="Curricular"] { color: var(--tipo-curricular); background: var(--tipo-curricular-bg); }
+.tipoChip[data-tipo="Académica"] { color: var(--tipo-academica); background: var(--tipo-academica-bg); }
+.tipoChip[data-tipo="Gestión"] { color: var(--tipo-gestion); background: var(--tipo-gestion-bg); }
+.tipoChip[data-tipo="Bienestar"] { color: var(--tipo-bienestar); background: var(--tipo-bienestar-bg); }
+.tipoChip[data-tipo="Evaluación"] { color: var(--tipo-evaluacion); background: var(--tipo-evaluacion-bg); }
+.tipoChip[data-tipo="Permanencia"] { color: var(--tipo-permanencia); background: var(--tipo-permanencia-bg); }
 .right { flex: none; }
 
 .verTodas { display: inline-block; margin-top: 12px; font-size: 12.5px; font-weight: 600; color: var(--acento); text-decoration: none; }
@@ -56,5 +84,11 @@
 .fill { height: 100%; background: var(--acento); border-radius: 999px; transition: width .4s ease; }
 
 @media (max-width: 860px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: 1fr; }
+  .stats { flex-direction: row; }
+}
+
+@media (max-width: 480px) {
+  .hero { flex-direction: column; text-align: center; }
+  .stats { flex-direction: column; }
 }

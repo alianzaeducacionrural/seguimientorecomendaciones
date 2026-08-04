@@ -204,10 +204,15 @@ function eliminarRegistro(entidad, id) {
   if (filaIndex === -1) return { ok: false, error: 'Registro no encontrado' };
   hoja.deleteRow(filaIndex);
 
-  // Al eliminar una recomendación se pierden también sus asignaciones y evidencias asociadas.
+  // Al eliminar una recomendación o un destinatario se pierden también sus
+  // asignaciones y evidencias asociadas — si no, quedan filas huérfanas
+  // apuntando a un id que ya no existe.
   if (nombreHoja === HOJAS.RECOMENDACIONES) {
-    const hojaAsig = hojaDe(HOJAS.ASIGNACIONES);
     const asignaciones = listarFilas(HOJAS.ASIGNACIONES).filter((a) => String(a.recomendacion_id) === String(id));
+    asignaciones.forEach((a) => eliminarRegistro('asignaciones', a.id));
+  }
+  if (nombreHoja === HOJAS.DESTINATARIOS) {
+    const asignaciones = listarFilas(HOJAS.ASIGNACIONES).filter((a) => String(a.destinatario_id) === String(id));
     asignaciones.forEach((a) => eliminarRegistro('asignaciones', a.id));
   }
   if (nombreHoja === HOJAS.ASIGNACIONES) {

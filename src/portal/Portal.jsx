@@ -72,7 +72,6 @@ function PortalContenido({ datos, token, onRecargar }) {
       </header>
       <main className={styles.main}>
         <div className={styles.hero}>
-          <div className={styles.eyebrow}>enlace personal // token activo</div>
           <h1>{destinatario.nombre}</h1>
           <p>
             {TIPOS_DESTINATARIO[destinatario.tipo]}{destinatario.municipio ? ` · ${destinatario.municipio}` : ''} — reporte de

@@ -23,9 +23,6 @@ export default function Dashboard() {
     const mapaDest = new Map(destinatarios.map((d) => [String(d.id), d]))
     const mapaRec = new Map(recomendaciones.map((r) => [String(r.id), r]))
 
-    const porTipoDestinatario = { institucion_educativa: 0, universidad: 0, entidad: 0 }
-    destinatarios.forEach((d) => { if (porTipoDestinatario[d.tipo] !== undefined) porTipoDestinatario[d.tipo]++ })
-
     const conteoEstado = { 'No iniciada': 0, 'En proceso': 0, 'Implementada': 0, 'Cancelada': 0 }
     const avancePorTipo = { institucion_educativa: [], universidad: [], entidad: [] }
     let vencidas = 0
@@ -65,8 +62,6 @@ export default function Dashboard() {
 
     return {
       totalRecomendaciones: recomendaciones.length,
-      totalDestinatarios: destinatarios.length,
-      porTipoDestinatario,
       cumplimientoGlobal,
       conteoEstado,
       vencidas,
@@ -84,6 +79,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      <span className="eyebrow">Resumen</span>
       <h1 className={styles.titulo}>Panel de control</h1>
       <p className={styles.desc}>
         Consolidado de recomendaciones emitidas por el Comité Académico y su estado de implementación
@@ -91,30 +87,24 @@ export default function Dashboard() {
       </p>
 
       <div className={styles.grid}>
-        <div className={styles.gaugeCard}>
-          <GaugeDial pct={100} value={stats.totalRecomendaciones} color="var(--ink-mute)" />
-          <div className={styles.label}>Recomendaciones</div>
-        </div>
-        <div className={styles.gaugeCard}>
-          <GaugeDial pct={100} value={stats.totalDestinatarios} color="var(--ink-mute)" />
-          <div className={styles.label}>Destinatarios</div>
-          <div className={styles.sub}>
-            {stats.porTipoDestinatario.institucion_educativa} IE · {stats.porTipoDestinatario.universidad} U ·{' '}
-            {stats.porTipoDestinatario.entidad} ent.
+        <div className={styles.hero}>
+          <GaugeDial pct={stats.cumplimientoGlobal} size={108} />
+          <div className={styles.heroTexto}>
+            <span className="eyebrow">Cumplimiento global</span>
+            <p className={`${styles.heroValor} font-mono`}>{stats.cumplimientoGlobal}%</p>
+            <p className={styles.heroSub}>promedio de avance sobre {asig.datos.length} asignaciones activas</p>
           </div>
         </div>
-        <div className={styles.gaugeCard}>
-          <GaugeDial pct={stats.cumplimientoGlobal} />
-          <div className={styles.label}>Cumplimiento global</div>
-        </div>
-        <div className={styles.gaugeCard}>
-          <GaugeDial
-            pct={stats.vencidas ? 100 : 0}
-            value={stats.vencidas}
-            color={stats.vencidas ? 'var(--cancelada)' : 'var(--no-iniciada)'}
-          />
-          <div className={styles.label}>Vencidas</div>
-          <div className={styles.sub}>requieren atención</div>
+        <div className={styles.stats}>
+          <div className={styles.stat}>
+            <span className="eyebrow">Recomendaciones</span>
+            <p className={`${styles.statValor} font-mono`}>{stats.totalRecomendaciones}</p>
+          </div>
+          <div className={`${styles.stat} ${stats.vencidas ? styles.statAlerta : ''}`}>
+            <span className="eyebrow">Vencidas</span>
+            <p className={`${styles.statValor} font-mono`}>{stats.vencidas}</p>
+            <p className={styles.statSub}>requieren atención</p>
+          </div>
         </div>
       </div>
 
@@ -122,11 +112,10 @@ export default function Dashboard() {
         <h3>Recomendaciones recientes</h3>
         <p className={styles.panelDesc}>Últimas {stats.recientes.length} de {stats.totalRecomendaciones}</p>
         {stats.recientes.map((r) => (
-          <div key={r.id} className={styles.recRow}>
-            <div className={`${styles.code} font-mono`}>{r.codigo}</div>
+          <Link key={r.id} to={`/panel/recomendaciones?abrir=${r.id}`} className={styles.recRow}>
             <div className={styles.body}>
               <p className={styles.recTitulo}>
-                <span className={styles.tipoChip}>{r.tipo}</span>
+                <span className={styles.tipoChip} data-tipo={r.tipo}>{r.tipo}</span>
                 {r.recomendacion}
               </p>
               <div className={styles.dest}>{r.destinatarios.join(' · ') || 'sin destinatarios asignados'}</div>
@@ -134,7 +123,7 @@ export default function Dashboard() {
             <div className={styles.right}>
               {r.destinatarios.length > 0 ? <EstadoTag estado={r.estadoDominante} /> : null}
             </div>
-          </div>
+          </Link>
         ))}
         <Link to="/panel/recomendaciones" className={styles.verTodas}>Ver todas las recomendaciones →</Link>
       </div>

@@ -7,96 +7,58 @@
 @import "@fontsource/space-mono/700.css";
 
 :root {
-  /* superficies */
-  --bg: #EEF1EC;
+  /* fuerza claro: sin toggle de tema en la app, no seguir prefers-color-scheme */
+  color-scheme: light;
+
+  /* superficies — menta claro, sin fondos ni acentos oscuros */
+  --bg: #F0FDFA;
   --surface: #FFFFFF;
-  --surface-inset: #F7F8F5;
-  --border: rgba(27, 36, 32, .12);
-  --border-strong: rgba(27, 36, 32, .22);
+  --surface-inset: #E9F8F5;
+  --border: rgba(8, 115, 107, .17);
+  --border-strong: rgba(8, 115, 107, .34);
 
   /* tinta */
-  --ink: #1B2420;
-  --ink-soft: #5C6960;
-  --ink-mute: #8B958E;
+  --ink: #10302C;
+  --ink-soft: #4B726D;
+  --ink-mute: #86A29D;
 
-  /* acento */
-  --acento: #92650E;
-  --acento-bg: #F5ECD9;
-  --verde: #1F6B45;
-  --rosada: #A8402C;
+  /* acento — teal vivo, un punto más saturado que la primera pasada para que
+     no se sienta apagado, sin perder el piso de contraste AA ya validado */
+  --acento: #08736B;
+  --acento-bg: #C4F9EC;
 
-  /* estado de implementación */
-  --implementada: #1F6B45;
-  --implementada-bg: #E4F1E9;
-  --en-proceso: #92650E;
-  --en-proceso-bg: #F5ECD9;
-  --no-iniciada: #5C6960;
-  --no-iniciada-bg: #E9ECE8;
-  --cancelada: #A8402C;
-  --cancelada-bg: #F6E4E0;
-  --vencida: #C23B2E;
+  /* estado de implementación — semáforo: rojo/amarillo/verde por urgencia,
+     cancelada queda neutra (no compite con "no iniciada" por la atención) */
+  --implementada: #15803D;
+  --implementada-bg: #DCFCE7;
+  --en-proceso: #854D0E;
+  --en-proceso-bg: #FEF9C3;
+  --no-iniciada: #B91C1C;
+  --no-iniciada-bg: #FEE2E2;
+  --cancelada: #3E7269;
+  --cancelada-bg: #E7F1EF;
+
+  /* tipo de recomendación — un color por categoría para escanear la lista de un vistazo */
+  --tipo-curricular: var(--acento);
+  --tipo-curricular-bg: var(--acento-bg);
+  --tipo-academica: #1D4ED8;
+  --tipo-academica-bg: #DBEAFE;
+  --tipo-gestion: #7E22CE;
+  --tipo-gestion-bg: #F3E8FF;
+  --tipo-bienestar: #BE185D;
+  --tipo-bienestar-bg: #FCE7F3;
+  --tipo-evaluacion: #0E7490;
+  --tipo-evaluacion-bg: #CFFAFE;
+  --tipo-permanencia: #4338CA;
+  --tipo-permanencia-bg: #E0E7FF;
 
   --radio-s: 7px;
   --radio-m: 12px;
   --radio-l: 18px;
 
-  --sombra: 0 1px 2px rgba(27, 36, 32, .05), 0 6px 20px -12px rgba(27, 36, 32, .18);
-}
-
-:root[data-theme="dark"] {
-  --bg: #182722;
-  --surface: #20342C;
-  --surface-inset: #182722;
-  --border: rgba(242, 239, 228, .13);
-  --border-strong: rgba(242, 239, 228, .24);
-
-  --ink: #F2EFE4;
-  --ink-soft: #AEBBB0;
-  --ink-mute: #7C8A80;
-
-  --acento: #E0B23C;
-  --acento-bg: #332A12;
-  --verde: #7FC49A;
-  --rosada: #E08E76;
-
-  --implementada: #7FC49A;
-  --implementada-bg: #1E332A;
-  --en-proceso: #E0B23C;
-  --en-proceso-bg: #332A12;
-  --no-iniciada: #AEBBB0;
-  --no-iniciada-bg: #232E29;
-  --cancelada: #E08E76;
-  --cancelada-bg: #33201A;
-  --vencida: #E9604D;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #182722;
-    --surface: #20342C;
-    --surface-inset: #182722;
-    --border: rgba(242, 239, 228, .13);
-    --border-strong: rgba(242, 239, 228, .24);
-
-    --ink: #F2EFE4;
-    --ink-soft: #AEBBB0;
-    --ink-mute: #7C8A80;
-
-    --acento: #E0B23C;
-    --acento-bg: #332A12;
-    --verde: #7FC49A;
-    --rosada: #E08E76;
-
-    --implementada: #7FC49A;
-    --implementada-bg: #1E332A;
-    --en-proceso: #E0B23C;
-    --en-proceso-bg: #332A12;
-    --no-iniciada: #AEBBB0;
-    --no-iniciada-bg: #232E29;
-    --cancelada: #E08E76;
-    --cancelada-bg: #33201A;
-    --vencida: #E9604D;
-  }
+  /* la jerarquía la da el borde, no la sombra — sombra solo para elementos
+     flotantes (modal), nunca para diferenciar una tarjeta en el flujo normal */
+  --sombra: 0 1px 2px rgba(15, 118, 110, .04), 0 10px 24px -16px rgba(15, 118, 110, .22);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -115,6 +77,7 @@ body {
 h1, h2, h3, h4 {
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
   font-weight: 700;
+  letter-spacing: -0.015em;
   margin: 0;
   text-wrap: balance;
 }
@@ -124,12 +87,34 @@ h1, h2, h3, h4 {
   font-variant-numeric: tabular-nums;
 }
 
+/* microlabel/eyebrow — el mismo tratamiento de mayúsculas + tracking que usan
+   las demás plataformas del Comité para encabezar secciones y KPIs */
+.eyebrow {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--ink-soft);
+}
+
 a { color: inherit; }
 button, input, select, textarea { font-family: inherit; }
 
 :focus-visible {
   outline: 2px solid var(--acento);
   outline-offset: 2px;
+}
+
+/* entrada escalonada — un solo momento de movimiento autorizado por vista,
+   nunca decorativo; se usa con --i para escalonar (ver .entrada) */
+@keyframes entrada {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.entrada {
+  animation: entrada .38s cubic-bezier(.2, .8, .3, 1) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
 }
 
 @media (prefers-reduced-motion: reduce) {

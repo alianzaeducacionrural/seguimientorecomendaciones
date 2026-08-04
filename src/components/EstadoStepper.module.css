@@ -1,0 +1,12 @@
+.stepper { display: inline-flex; gap: 3px; align-items: center; flex: none; }
+
+.tick {
+  width: 16px; height: 5px; border-radius: 3px; background: var(--border);
+  transition: background .25s ease;
+}
+
+.tick.no-iniciada { background: var(--no-iniciada); }
+.tick.en-proceso { background: var(--en-proceso); }
+.tick.implementada { background: var(--implementada); }
+
+.stepper.cancelada .tick { background: var(--cancelada-bg); }

@@ -8,6 +8,7 @@ const TIPOS = ['institucion_educativa', 'universidad', 'entidad']
  * Selector multi-tipo: el usuario elige un tipo, marca destinatarios, cambia
  * de tipo y sigue marcando — las selecciones se acumulan en `seleccionados`
  * sin importar el tipo, porque una recomendación puede ir a varios a la vez.
+ * Instituciones educativas: por ahora solo se muestran las de Manizales.
  */
 export default function SelectorDestinatarios({ destinatarios, seleccionados, onChange }) {
   const [tab, setTab] = useState('institucion_educativa')
@@ -16,6 +17,8 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
   const porTipo = useMemo(() => {
     const grupos = { institucion_educativa: [], universidad: [], entidad: [] }
     for (const d of destinatarios) {
+      // por ahora solo se asignan recomendaciones a instituciones educativas de Manizales
+      if (d.tipo === 'institucion_educativa' && d.municipio !== 'Manizales') continue
       if (grupos[d.tipo]) grupos[d.tipo].push(d)
     }
     return grupos
@@ -37,10 +40,8 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
     else onChange([...seleccionados, idStr])
   }
 
-  function seleccionarTodasManizales() {
-    const ids = porTipo.institucion_educativa
-      .filter((d) => d.municipio === 'Manizales')
-      .map((d) => String(d.id))
+  function seleccionarTodasIE() {
+    const ids = porTipo.institucion_educativa.map((d) => String(d.id))
     onChange(Array.from(new Set([...seleccionados, ...ids])))
   }
 
@@ -69,7 +70,7 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
         <input
           type="search"
           className={styles.buscador}
-          placeholder="Buscar institución o municipio…"
+          placeholder="Buscar institución…"
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           aria-label="Buscar institución educativa"
@@ -86,7 +87,7 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
               onChange={() => alternar(d.id)}
             />
             {d.nombre}
-            {d.municipio && <span className={styles.mun}>{d.municipio}</span>}
+            {d.tipo !== 'institucion_educativa' && d.municipio && <span className={styles.mun}>{d.municipio}</span>}
           </label>
         ))}
       </div>
@@ -109,8 +110,8 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
       )}
 
       {tab === 'institucion_educativa' && (
-        <button type="button" className={styles.btnGhost} onClick={seleccionarTodasManizales}>
-          Seleccionar todas las IE de Manizales
+        <button type="button" className={styles.btnGhost} onClick={seleccionarTodasIE}>
+          Seleccionar todas las instituciones
         </button>
       )}
     </div>

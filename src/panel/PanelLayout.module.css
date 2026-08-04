@@ -37,7 +37,17 @@
 .name { font-weight: 700; font-size: 14px; letter-spacing: .01em; }
 .sub { font-size: 11px; color: var(--ink-soft); }
 
-.rail { display: flex; gap: 26px; }
+.rail { display: flex; align-items: flex-end; gap: 22px; }
+
+.grupo { display: flex; flex-direction: column; gap: 6px; }
+.grupoLabel {
+  font-size: 9.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.grupoLinks { display: flex; gap: 22px; }
+
+.divisor { width: 1px; align-self: stretch; background: var(--border); margin-bottom: 6px; }
+
 .rail a {
   text-decoration: none;
   color: var(--ink-soft);
@@ -47,9 +57,10 @@
   letter-spacing: .05em;
   text-transform: uppercase;
   border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
 }
-.rail a.activo, .rail a:hover { color: var(--ink); }
-.rail a.activo { border-bottom-color: var(--acento); }
+.rail a:hover { color: var(--ink); }
+.rail a.activo { color: var(--ink); border-bottom-color: var(--acento); }
 
 .main {
   max-width: 1180px;
@@ -60,5 +71,7 @@
 @media (max-width: 720px) {
   .top { padding: 14px 18px; }
   .main { padding: 22px 16px 80px; }
-  .rail { gap: 16px; }
+  .rail { gap: 16px; flex-wrap: wrap; }
+  .grupoLinks { gap: 16px; }
+  .divisor { display: none; }
 }

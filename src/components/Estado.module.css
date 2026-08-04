@@ -9,7 +9,7 @@
   text-align: center;
 }
 
-.error { color: var(--cancelada); }
+.error { color: var(--no-iniciada); }
 
 .spinner {
   width: 18px;

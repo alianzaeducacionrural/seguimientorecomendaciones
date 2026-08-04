@@ -24,8 +24,9 @@ export function useEntidad(entidad) {
   }, [recargar])
 
   const crearItem = useCallback(async (valores) => {
-    await crear(entidad, valores)
+    const res = await crear(entidad, valores)
     await recargar()
+    return res.id
   }, [entidad, recargar])
 
   const editarItem = useCallback(async (id, valores) => {

@@ -1,0 +1,45 @@
+.resumen { border-bottom: 1px dashed var(--border); padding-bottom: 16px; margin-bottom: 16px; }
+.resumenTop { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.tipoChip {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em;
+  background: var(--acento-bg); color: var(--acento); padding: 3px 9px; border-radius: 6px; font-weight: 700;
+}
+.texto { font-size: 13.5px; font-weight: 600; margin: 0 0 6px; line-height: 1.45; }
+.evidenciaEsperada { font-size: 12px; color: var(--ink-soft); margin: 0; }
+
+.bloque { margin-bottom: 16px; }
+.bloqueTitulo { display: block; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-bottom: 8px; }
+.listaEvidencias { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.listaEvidencias li { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12.5px; }
+.listaEvidencias a { color: var(--acento); }
+.evFecha { color: var(--ink-mute); font-size: 11px; flex: none; }
+
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.full { grid-column: 1 / -1; }
+.form label { display: flex; flex-direction: column; gap: 6px; }
+.form span { font-size: 10.5px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .05em; }
+.form select, .form input, .form textarea {
+  width: 100%; border: 1px solid var(--border); background: var(--surface-inset); border-radius: 8px;
+  padding: 9px 11px; font-size: 13px; color: var(--ink); font-family: inherit;
+}
+
+.evidRow { display: flex; gap: 8px; }
+.evidRow input { flex: 1; }
+.btnGhost {
+  appearance: none; border: 1px dashed var(--border-strong); background: transparent; color: var(--ink-soft);
+  padding: 9px 14px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; white-space: nowrap;
+}
+.btnGhost:hover { color: var(--ink); border-color: var(--acento); }
+
+.mensaje { font-size: 12px; color: var(--acento); margin: 12px 0 0; }
+
+.btnPrimary {
+  appearance: none; border: 1px solid var(--acento); background: var(--acento); color: var(--surface);
+  padding: 11px 22px; border-radius: 9px; font-weight: 800; font-size: 12.5px; letter-spacing: .03em;
+  text-transform: uppercase; cursor: pointer; margin-top: 16px;
+}
+.btnPrimary:disabled { opacity: .6; cursor: default; }
+
+@media (max-width: 560px) {
+  .form { grid-template-columns: 1fr; }
+}
