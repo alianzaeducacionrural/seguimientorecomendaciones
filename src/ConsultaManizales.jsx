@@ -96,12 +96,10 @@ export default function ConsultaManizales() {
   return (
     <div className={styles.shell}>
       <div className={styles.head}>
-        <span className="eyebrow">Consulta pública — solo lectura</span>
         <h1 className={styles.titulo}>Recomendaciones — Instituciones educativas de Manizales</h1>
         <p className={styles.desc}>
           Estado de implementación de las recomendaciones del Comité Académico para cada institución
-          educativa de Manizales, con las evidencias cargadas por cada una. Esta vista no permite
-          editar ni gestionar información.
+          educativa de Manizales, con las evidencias cargadas por cada una.
         </p>
       </div>
 
