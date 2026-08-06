@@ -5,9 +5,15 @@
   padding: 40px 20px 60px;
 }
 
-.head { margin-bottom: 20px; }
+.head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
 .titulo { font-size: 24px; margin: 4px 0 8px; }
 .desc { color: var(--ink-soft); margin: 0; font-size: 13.5px; max-width: 600px; }
+
+.btnGhost {
+  appearance: none; border: 1px dashed var(--border-strong); background: transparent; color: var(--ink-soft);
+  padding: 10px 16px; border-radius: 9px; font-weight: 700; font-size: 12px; cursor: pointer; flex: none;
+}
+.btnGhost:hover { color: var(--ink); border-color: var(--acento); }
 
 .buscador {
   width: 100%;

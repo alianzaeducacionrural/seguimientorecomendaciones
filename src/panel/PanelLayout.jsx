@@ -39,7 +39,7 @@ export default function PanelLayout() {
               <span className={styles.grupoLabel}>Externo</span>
               <div className={styles.grupoLinks}>
                 <a href={`${import.meta.env.BASE_URL}consulta-manizales`} target="_blank" rel="noreferrer">
-                  Consulta Manizales ↗
+                  Consulta ↗
                 </a>
               </div>
             </div>

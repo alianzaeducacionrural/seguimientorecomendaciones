@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useEntidad } from './panel/hooks/useEntidad'
 import { Cargando, AvisoError, Vacio } from './components/Estado'
 import EstadoTag from './components/EstadoTag'
@@ -35,6 +35,23 @@ export default function ConsultaManizales() {
 
   const [busqueda, setBusqueda] = useState('')
   const [abiertas, setAbiertas] = useState(() => new Set())
+  const [enlaceCopiado, setEnlaceCopiado] = useState(false)
+
+  useEffect(() => {
+    const anterior = document.title
+    document.title = 'Consulta Manizales'
+    return () => { document.title = anterior }
+  }, [])
+
+  async function copiarEnlace() {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+    } catch {
+      window.prompt('Copia el enlace:', window.location.href)
+    }
+    setEnlaceCopiado(true)
+    setTimeout(() => setEnlaceCopiado(false), 1600)
+  }
 
   const asignacionesPorDestinatario = useMemo(() => {
     const mapa = new Map()
@@ -96,11 +113,16 @@ export default function ConsultaManizales() {
   return (
     <div className={styles.shell}>
       <div className={styles.head}>
-        <h1 className={styles.titulo}>Recomendaciones — Instituciones educativas de Manizales</h1>
-        <p className={styles.desc}>
-          Estado de implementación de las recomendaciones del Comité Académico para cada institución
-          educativa de Manizales, con las evidencias cargadas por cada una.
-        </p>
+        <div>
+          <h1 className={styles.titulo}>Recomendaciones — Instituciones educativas de Manizales</h1>
+          <p className={styles.desc}>
+            Estado de implementación de las recomendaciones del Comité Académico para cada institución
+            educativa de Manizales, con las evidencias cargadas por cada una.
+          </p>
+        </div>
+        <button type="button" className={styles.btnGhost} onClick={copiarEnlace}>
+          {enlaceCopiado ? 'Copiado' : 'Copiar enlace'}
+        </button>
       </div>
 
       <input
