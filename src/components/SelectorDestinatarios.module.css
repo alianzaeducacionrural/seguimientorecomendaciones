@@ -34,7 +34,7 @@
 }
 
 .catalogo {
-  max-height: 230px;
+  max-height: 320px;
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: var(--radio-m);
@@ -54,6 +54,25 @@
 .item input { accent-color: var(--acento); width: 16px; height: 16px; flex: none; }
 
 .mun { margin-left: auto; color: var(--ink-mute); font-size: 11.5px; }
+
+/* instituciones agrupadas por municipio: primero el municipio, luego se despliega */
+.grupoMuni { border-bottom: 1px dashed var(--border); }
+.grupoMuni:last-child { border-bottom: none; }
+
+.muniHead {
+  appearance: none; border: 0; background: none; width: 100%; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 14px; text-align: left; font-family: inherit; color: inherit;
+}
+.muniHead:hover { background: var(--surface-inset); }
+.muniNombre { font-size: 13px; font-weight: 700; }
+.muniMeta { display: flex; align-items: center; gap: 8px; flex: none; }
+
+.chevron, .chevronAbierto { color: var(--ink-mute); transition: transform .2s ease; flex: none; }
+.chevronAbierto { transform: rotate(180deg); color: var(--acento); }
+
+.muniBody { background: var(--surface-inset); border-top: 1px dashed var(--border); }
+.muniBody .item { padding-left: 26px; }
 
 .vacio { padding: 16px; color: var(--ink-mute); font-size: 13px; text-align: center; }
 

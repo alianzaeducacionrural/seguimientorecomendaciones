@@ -7,6 +7,7 @@ import Destinatarios from './panel/Destinatarios.jsx'
 import BaseDatos from './panel/BaseDatos.jsx'
 import Portal from './portal/Portal.jsx'
 import EmitirRecomendacion from './EmitirRecomendacion.jsx'
+import ConsultaManizales from './ConsultaManizales.jsx'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
       </Route>
       <Route path="/portal" element={<Portal />} />
       <Route path="/emitir" element={<EmitirRecomendacion />} />
+      <Route path="/consulta-manizales" element={<ConsultaManizales />} />
     </Routes>
   )
 }

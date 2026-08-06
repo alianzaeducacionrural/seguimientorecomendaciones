@@ -17,6 +17,9 @@ export default function Home() {
         ¿Recibiste un enlace personal de tu institución? Ábrelo directamente desde el correo o
         mensaje del Comité — no necesitas iniciar sesión aquí.
       </p>
+      <p className={styles.nota}>
+        <Link to="/consulta-manizales">Consultar el estado de las recomendaciones de Manizales</Link> (solo lectura).
+      </p>
     </div>
   )
 }

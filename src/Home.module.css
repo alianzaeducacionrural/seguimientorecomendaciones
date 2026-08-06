@@ -28,3 +28,4 @@
 }
 
 .nota { font-size: 12px; color: var(--ink-mute); margin-top: 18px; max-width: 420px; }
+.nota a { color: var(--acento); font-weight: 600; }

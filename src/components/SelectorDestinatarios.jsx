@@ -4,21 +4,29 @@ import styles from './SelectorDestinatarios.module.css'
 
 const TIPOS = ['institucion_educativa', 'universidad', 'entidad']
 
+function Chevron({ abierto }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" className={abierto ? styles.chevronAbierto : styles.chevron}>
+      <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 /**
  * Selector multi-tipo: el usuario elige un tipo, marca destinatarios, cambia
  * de tipo y sigue marcando — las selecciones se acumulan en `seleccionados`
  * sin importar el tipo, porque una recomendación puede ir a varios a la vez.
- * Instituciones educativas: por ahora solo se muestran las de Manizales.
+ * Instituciones educativas: todos los municipios del catálogo, agrupadas
+ * primero por municipio (desplegable) y luego la lista de instituciones.
  */
 export default function SelectorDestinatarios({ destinatarios, seleccionados, onChange }) {
   const [tab, setTab] = useState('institucion_educativa')
   const [busqueda, setBusqueda] = useState('')
+  const [muniAbiertos, setMuniAbiertos] = useState(() => new Set())
 
   const porTipo = useMemo(() => {
     const grupos = { institucion_educativa: [], universidad: [], entidad: [] }
     for (const d of destinatarios) {
-      // por ahora solo se asignan recomendaciones a instituciones educativas de Manizales
-      if (d.tipo === 'institucion_educativa' && d.municipio !== 'Manizales') continue
       if (grupos[d.tipo]) grupos[d.tipo].push(d)
     }
     return grupos
@@ -31,6 +39,20 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
     return lista.filter((d) => d.nombre.toLowerCase().includes(q) || (d.municipio || '').toLowerCase().includes(q))
   }, [porTipo, tab, busqueda])
 
+  const buscando = busqueda.trim().length > 0
+
+  const municipios = useMemo(() => {
+    if (tab !== 'institucion_educativa') return null
+    const mapa = new Map()
+    for (const d of filtrados) {
+      const m = d.municipio || 'Sin municipio'
+      const lista = mapa.get(m) || []
+      lista.push(d)
+      mapa.set(m, lista)
+    }
+    return [...mapa.entries()].sort((a, b) => a[0].localeCompare(b[0]))
+  }, [filtrados, tab])
+
   const seleccionadosSet = useMemo(() => new Set(seleccionados), [seleccionados])
   const mapaPorId = useMemo(() => new Map(destinatarios.map((d) => [String(d.id), d])), [destinatarios])
 
@@ -38,6 +60,15 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
     const idStr = String(id)
     if (seleccionadosSet.has(idStr)) onChange(seleccionados.filter((s) => s !== idStr))
     else onChange([...seleccionados, idStr])
+  }
+
+  function alternarMuni(municipio) {
+    setMuniAbiertos((prev) => {
+      const next = new Set(prev)
+      if (next.has(municipio)) next.delete(municipio)
+      else next.add(municipio)
+      return next
+    })
   }
 
   function seleccionarTodasIE() {
@@ -70,7 +101,7 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
         <input
           type="search"
           className={styles.buscador}
-          placeholder="Buscar institución…"
+          placeholder="Buscar institución o municipio…"
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           aria-label="Buscar institución educativa"
@@ -79,17 +110,49 @@ export default function SelectorDestinatarios({ destinatarios, seleccionados, on
 
       <div className={styles.catalogo}>
         {filtrados.length === 0 && <p className={styles.vacio}>Sin resultados.</p>}
-        {filtrados.map((d) => (
-          <label key={d.id} className={styles.item}>
-            <input
-              type="checkbox"
-              checked={seleccionadosSet.has(String(d.id))}
-              onChange={() => alternar(d.id)}
-            />
-            {d.nombre}
-            {d.tipo !== 'institucion_educativa' && d.municipio && <span className={styles.mun}>{d.municipio}</span>}
-          </label>
-        ))}
+
+        {tab === 'institucion_educativa' ? (
+          municipios.map(([municipio, lista]) => {
+            const abierto = buscando || muniAbiertos.has(municipio)
+            return (
+              <div key={municipio} className={styles.grupoMuni}>
+                <button type="button" className={styles.muniHead} onClick={() => alternarMuni(municipio)} aria-expanded={abierto}>
+                  <span className={styles.muniNombre}>{municipio}</span>
+                  <span className={styles.muniMeta}>
+                    <span className={styles.n}>{lista.length}</span>
+                    <Chevron abierto={abierto} />
+                  </span>
+                </button>
+                {abierto && (
+                  <div className={styles.muniBody}>
+                    {lista.map((d) => (
+                      <label key={d.id} className={styles.item}>
+                        <input
+                          type="checkbox"
+                          checked={seleccionadosSet.has(String(d.id))}
+                          onChange={() => alternar(d.id)}
+                        />
+                        {d.nombre}
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })
+        ) : (
+          filtrados.map((d) => (
+            <label key={d.id} className={styles.item}>
+              <input
+                type="checkbox"
+                checked={seleccionadosSet.has(String(d.id))}
+                onChange={() => alternar(d.id)}
+              />
+              {d.nombre}
+              {d.municipio && <span className={styles.mun}>{d.municipio}</span>}
+            </label>
+          ))
+        )}
       </div>
 
       {seleccionados.length > 0 && (
