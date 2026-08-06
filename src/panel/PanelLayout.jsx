@@ -34,6 +34,15 @@ export default function PanelLayout() {
                 </NavLink>
               </div>
             </div>
+            <div className={styles.divisor} aria-hidden="true" />
+            <div className={styles.grupo}>
+              <span className={styles.grupoLabel}>Externo</span>
+              <div className={styles.grupoLinks}>
+                <a href={`${import.meta.env.BASE_URL}consulta-manizales`} target="_blank" rel="noreferrer">
+                  Consulta Manizales ↗
+                </a>
+              </div>
+            </div>
           </nav>
         </div>
       </header>
