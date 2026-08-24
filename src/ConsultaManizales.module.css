@@ -9,11 +9,13 @@
 .titulo { font-size: 24px; margin: 4px 0 8px; }
 .desc { color: var(--ink-soft); margin: 0; font-size: 13.5px; max-width: 600px; }
 
-.btnGhost {
-  appearance: none; border: 1px dashed var(--border-strong); background: transparent; color: var(--ink-soft);
-  padding: 10px 16px; border-radius: 9px; font-weight: 700; font-size: 12px; cursor: pointer; flex: none;
+.filtros { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.filtros button {
+  appearance: none; border: 1px solid var(--border); background: var(--surface); color: var(--ink-soft);
+  padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .03em; cursor: pointer;
 }
-.btnGhost:hover { color: var(--ink); border-color: var(--acento); }
+.filtros button.activo { border-color: var(--acento); color: var(--acento); background: var(--acento-bg); }
 
 .buscador {
   width: 100%;

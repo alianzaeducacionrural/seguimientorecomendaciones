@@ -3,8 +3,10 @@ import { useEntidad } from './panel/hooks/useEntidad'
 import { Cargando, AvisoError, Vacio } from './components/Estado'
 import EstadoTag from './components/EstadoTag'
 import EstadoStepper from './components/EstadoStepper'
-import { formatearFecha } from './utils/formato'
+import { formatearFecha, ESTADOS } from './utils/formato'
 import styles from './ConsultaManizales.module.css'
+
+const FILTROS_ESTADO = ['todos', ...ESTADOS]
 
 function Chevron({ abierto }) {
   return (
@@ -35,23 +37,13 @@ export default function ConsultaManizales() {
 
   const [busqueda, setBusqueda] = useState('')
   const [abiertas, setAbiertas] = useState(() => new Set())
-  const [enlaceCopiado, setEnlaceCopiado] = useState(false)
+  const [filtroEstado, setFiltroEstado] = useState('todos')
 
   useEffect(() => {
     const anterior = document.title
     document.title = 'Consulta Manizales'
     return () => { document.title = anterior }
   }, [])
-
-  async function copiarEnlace() {
-    try {
-      await navigator.clipboard.writeText(window.location.href)
-    } catch {
-      window.prompt('Copia el enlace:', window.location.href)
-    }
-    setEnlaceCopiado(true)
-    setTimeout(() => setEnlaceCopiado(false), 1600)
-  }
 
   const asignacionesPorDestinatario = useMemo(() => {
     const mapa = new Map()
@@ -90,12 +82,17 @@ export default function ConsultaManizales() {
 
   const filtradas = useMemo(() => {
     let lista = instituciones
+    if (filtroEstado !== 'todos') {
+      lista = lista
+        .map((d) => ({ ...d, asignaciones: d.asignaciones.filter((a) => (a.estado || 'No iniciada') === filtroEstado) }))
+        .filter((d) => d.asignaciones.length > 0)
+    }
     if (busqueda.trim()) {
       const q = busqueda.trim().toLowerCase()
       lista = lista.filter((d) => d.nombre.toLowerCase().includes(q))
     }
     return [...lista].sort((a, b) => a.nombre.localeCompare(b.nombre))
-  }, [instituciones, busqueda])
+  }, [instituciones, busqueda, filtroEstado])
 
   function alternar(id) {
     setAbiertas((prev) => {
@@ -120,9 +117,19 @@ export default function ConsultaManizales() {
             educativa de Manizales, con las evidencias cargadas por cada una.
           </p>
         </div>
-        <button type="button" className={styles.btnGhost} onClick={copiarEnlace}>
-          {enlaceCopiado ? 'Copiado' : 'Copiar enlace'}
-        </button>
+      </div>
+
+      <div className={styles.filtros}>
+        {FILTROS_ESTADO.map((f) => (
+          <button
+            key={f}
+            type="button"
+            className={filtroEstado === f ? styles.activo : ''}
+            onClick={() => setFiltroEstado(f)}
+          >
+            {f === 'todos' ? 'Todos' : f}
+          </button>
+        ))}
       </div>
 
       <input
@@ -134,7 +141,7 @@ export default function ConsultaManizales() {
         aria-label="Buscar institución"
       />
 
-      {filtradas.length === 0 && <Vacio texto="No hay instituciones de Manizales con recomendaciones asignadas." />}
+      {filtradas.length === 0 && <Vacio texto="No hay instituciones con recomendaciones que coincidan con el filtro." />}
 
       <div className={styles.libreta}>
         {filtradas.map((d) => {
